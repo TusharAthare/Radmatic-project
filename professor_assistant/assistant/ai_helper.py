@@ -17,8 +17,15 @@ class ProfessorAssistant:
     
     def __init__(self) -> None:
         """Initialize the ProfessorAssistant with OpenAI language model."""
+        api_key = os.getenv('OPENAI_API_KEY')
+        if not api_key:
+            raise ValueError("OpenAI API key not found in environment variables")
+        
         logger.info("Initializing ProfessorAssistant")
-        self.llm = OpenAI(temperature=0)
+        self.llm = OpenAI(
+            openai_api_key=api_key,
+            temperature=0
+        )
         
     def process_instruction(self, instruction: str) -> Dict[str, Any]:
         """
