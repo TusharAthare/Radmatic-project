@@ -10,15 +10,13 @@ services:
       - "8000:8000"
     depends_on:
       - db
-    environment:
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/professor_db
+    env_file:
+      - .env
       
   db:
     image: postgres:13
-    environment:
-      - POSTGRES_DB=professor_db
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+    env_file:
+      - .env
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
